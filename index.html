@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prank Love ❤️</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(135deg, #ff758c, #ff7eb3);
+
+            font-family: Arial, sans-serif;
+
+            overflow: hidden;
+        }
+
+        .box {
+            background: white;
+
+            width: 460px;
+            max-width: 90%;
+
+            padding: 35px 25px;
+
+            border-radius: 28px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.25);
+
+            position: relative;
+
+            transition: 0.3s;
+        }
+
+        h1 {
+            color: #ff477e;
+
+            margin-bottom: 18px;
+
+            line-height: 1.3;
+        }
+
+        #counter {
+            color: #888;
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        #score {
+            color: #ff477e;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        /* PROGRESS BAR */
+
+        .progress {
+            width: 100%;
+
+            height: 8px;
+
+            background: #eee;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 22px;
+        }
+
+        #progressBar {
+            height: 100%;
+
+            width: 10%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff477e,
+                    #ff9abc
+                );
+
+            transition: 0.4s;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+            min-height: 90px;
+        }
+
+        button {
+            border: none;
+
+            border-radius: 14px;
+
+            padding: 13px 24px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+        #yes {
+            background: #ff477e;
+
+            color: white;
+
+            box-shadow:
+                0 8px 20px rgba(255,71,126,0.3);
+        }
+
+        #no {
+            background: #e5e5e5;
+
+            color: #333;
+        }
+
+        #next,
+        #copyLink,
+        #shareBtn,
+        #playAgain {
+
+            background: #ff477e;
+
+            color: white;
+
+            display: none;
+        }
+
+        /* MESSAGE */
+
+        #message {
+
+            display: none;
+
+            font-size: 25px;
+
+            color: #ff477e;
+
+            font-weight: bold;
+
+            margin-top: 20px;
+
+            animation:
+                pop 0.6s ease;
+        }
+
+        @keyframes pop {
+
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+        /* SUCCESS EFFECT */
+
+        .happy {
+
+            animation:
+                happyBox 0.7s ease;
+        }
+
+        @keyframes happyBox {
+
+            0% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(1.08) rotate(-2deg);
+            }
+
+            70% {
+                transform: scale(1.05) rotate(2deg);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+        /* FLOATING HEART */
+
+        .heart {
+
+            position: fixed;
+
+            font-size: 28px;
+
+            pointer-events: none;
+
+            z-index: 999;
+
+            animation:
+                heartFly 2.2s ease-out forwards;
+        }
+
+        @keyframes heartFly {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    scale(0.5);
+
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-550px)
+                    translateX(var(--move))
+                    rotate(360deg)
+                    scale(1.5);
+
+                opacity: 0;
+            }
+
+        }
+
+        /* CONFETTI */
+
+        .confetti {
+
+            position: fixed;
+
+            width: 10px;
+            height: 15px;
+
+            top: -20px;
+
+            z-index: 1000;
+
+            pointer-events: none;
+
+            animation:
+                fall 2.5s linear forwards;
+        }
+
+        @keyframes fall {
+
+            0% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 1;
+            }
+
+            100% {
+
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+
+                opacity: 0;
+            }
+
+        }
+
+        /* SHAKE */
+
+        .shake {
+
+            animation:
+                shake 0.35s;
+        }
+
+        @keyframes shake {
+
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+
+            75% {
+                transform: translateX(-10px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+
+        }
+
+        .smallText {
+
+            color: #999;
+
+            font-size: 13px;
+
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="box" id="box">
+
+        <div id="counter">
+            Question 1 / 10
+        </div>
+
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+
+        <div id="score">
+            ❤️ Love points: 0
+        </div>
+
+
+        <h1 id="question">
+            Do you love me? ❤️
+        </h1>
+
+
+        <div class="buttons" id="buttons">
+
+            <button id="yes">
+                Yes ❤️
+            </button>
+
+            <button id="no">
+                No 😭
+            </button>
+
+        </div>
+
+
+        <button id="next">
+            Next ➡️
+        </button>
+
+
+        <div id="message"></div>
+
+
+        <div id="finalButtons">
+
+            <button id="copyLink">
+                🔗 Copy Link
+            </button>
+
+            <button id="shareBtn">
+                📤 Share
+            </button>
+
+            <button id="playAgain">
+                🔄 Play Again
+            </button>
+
+        </div>
+
+
+        <div class="smallText">
+            Made with ❤️
+        </div>
+
+    </div>
+
+
+<script>
+
+    /* =========================
+       QUESTIONS
+    ========================= */
+
+    const questions = [
+
+        {
+            question: "Do you love me? ❤️",
+            yes: "YES ❤️",
+            no: "No 😭"
+        },
+
+        {
+            question: "Are you really sure? 👀",
+            yes: "Yes ❤️",
+            no: "Maybe... 😭"
+        },
+
+        {
+            question: "Would you choose me over chocolate? 🍫",
+            yes: "Of course ❤️",
+            no: "Never 😂"
+        },
+
+        {
+            question: "Would you miss me if I disappeared? 🥺",
+            yes: "Definitely ❤️",
+            no: "Nope 😎"
+        },
+
+        {
+            question: "Am I your favorite person? 👑",
+            yes: "Obviously ❤️",
+            no: "Not really 😂"
+        },
+
+        {
+            question: "Would you go on a date with me? 🌹",
+            yes: "LET'S GO ❤️",
+            no: "Maybe later 😭"
+        },
+
+        {
+            question: "Do I make you smile? 😊",
+            yes: "Always ❤️",
+            no: "Not today 😂"
+        },
+
+        {
+            question: "Do you trust me? 🤝",
+            yes: "YES ❤️",
+            no: "Hmm 🤨"
+        },
+
+        {
+            question: "Would you stay with me forever? ♾️",
+            yes: "FOREVER ❤️",
+            no: "I need time 😭"
+        },
+
+        {
+            question: "LAST QUESTION... Do you love me? 😈❤️",
+            yes: "YESSSS ❤️❤️❤️",
+            no: "NO 😭"
+        }
+
+    ];
+
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    let currentQuestion = 0;
+
+    let score = 0;
+
+    let yesSize = 1;
+
+    let noSize = 1;
+
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const question =
+        document.getElementById("question");
+
+    const yes =
+        document.getElementById("yes");
+
+    const no =
+        document.getElementById("no");
+
+    const buttons =
+        document.getElementById("buttons");
+
+    const next =
+        document.getElementById("next");
+
+    const message =
+        document.getElementById("message");
+
+    const counter =
+        document.getElementById("counter");
+
+    const scoreText =
+        document.getElementById("score");
+
+    const box =
+        document.getElementById("box");
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    const copyLink =
+        document.getElementById("copyLink");
+
+    const shareBtn =
+        document.getElementById("shareBtn");
+
+    const playAgain =
+        document.getElementById("playAgain");
+
+
+    /* =========================
+       SOUND ENGINE
+    ========================= */
+
+    let audioContext;
+
+
+    function startAudio() {
+
+        if (!audioContext) {
+
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+        }
+
+        if (
+            audioContext.state ===
+            "suspended"
+        ) {
+
+            audioContext.resume();
+
+        }
+
+    }
+
+
+    /* YES SOUND
+       Happy little melody
+    */
+
+    function happySound() {
+
+        startAudio();
+
+        const notes = [
+            523.25,
+            659.25,
+            783.99,
+            1046.50
+        ];
+
+        notes.forEach(
+            (frequency, index) => {
+
+                const oscillator =
+                    audioContext
+                    .createOscillator();
+
+                const gain =
+                    audioContext
+                    .createGain();
+
+
+                oscillator.connect(gain);
+
+                gain.connect(
+                    audioContext.destination
+                );
+
+
+                oscillator.type =
+                    "sine";
+
+                oscillator.frequency.value =
+                    frequency;
+
+
+                gain.gain.setValueAtTime(
+                    0.001,
+                    audioContext.currentTime +
+                    index * 0.12
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.20,
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.03
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.001,
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.32
+                );
+
+
+                oscillator.start(
+                    audioContext.currentTime +
+                    index * 0.12
+                );
+
+
+                oscillator.stop(
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.35
+                );
+
+            }
+        );
+
+    }
+
+
+    /* NO SOUND */
+
+    function noSound() {
+
+        startAudio();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        oscillator.type =
+            "triangle";
+
+        oscillator.frequency.value =
+            150;
+
+
+        gain.gain.value =
+            0.12;
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            audioContext.currentTime +
+            0.25
+        );
+
+    }
+
+
+    /* WIN SOUND */
+
+    function winSound() {
+
+        startAudio();
+
+        const notes = [
+            523.25,
+            659.25,
+            783.99,
+            1046.50,
+            1318.51
+        ];
+
+
+        notes.forEach(
+            (frequency, index) => {
+
+                const oscillator =
+                    audioContext
+                    .createOscillator();
+
+                const gain =
+                    audioContext
+                    .createGain();
+
+
+                oscillator.connect(gain);
+
+                gain.connect(
+                    audioContext.destination
+                );
+
+
+                oscillator.type =
+                    "sine";
+
+                oscillator.frequency.value =
+                    frequency;
+
+
+                gain.gain.setValueAtTime(
+                    0.001,
+                    audioContext.currentTime +
+                    index * 0.12
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.22,
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.03
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.001,
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.45
+                );
+
+
+                oscillator.start(
+                    audioContext.currentTime +
+                    index * 0.12
+                );
+
+
+                oscillator.stop(
+                    audioContext.currentTime +
+                    index * 0.12 +
+                    0.5
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================
+       HEARTS
+    ========================= */
+
+    function createHearts() {
+
+        for (
+            let i = 0;
+            i < 35;
+            i++
+        ) {
+
+            const heart =
+                document.createElement(
+                    "div"
+                );
+
+
+            heart.className =
+                "heart";
+
+
+            const emojis = [
+                "❤️",
+                "💕",
+                "💖",
+                "💗",
+                "💓",
+                "💘"
+            ];
+
+
+            heart.innerHTML =
+                emojis[
+                    Math.floor(
+                        Math.random() *
+                        emojis.length
+                    )
+                ];
+
+
+            heart.style.left =
+                Math.random() *
+                100 +
+                "vw";
+
+
+            heart.style.top =
+                (70 +
+                Math.random() * 25) +
+                "vh";
+
+
+            heart.style.setProperty(
+                "--move",
+                (Math.random() *
+                300 - 150) +
+                "px"
+            );
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 2300);
+
+        }
+
+    }
+
+
+    /* =========================
+       CONFETTI
+    ========================= */
+
+    function createConfetti() {
+
+        const pieces = [
+            "🎉",
+            "🎊",
+            "💖",
+            "❤️",
+            "✨"
+        ];
+
+
+        for (
+            let i = 0;
+            i < 60;
+            i++
+        ) {
+
+            const confetti =
+                document.createElement(
+                    "div"
+                );
+
+
+            confetti.className =
+                "confetti";
+
+
+            confetti.innerHTML =
+                pieces[
+                    Math.floor(
+                        Math.random() *
+                        pieces.length
+                    )
+                ];
+
+
+            confetti.style.left =
+                Math.random() *
+                100 +
+                "vw";
+
+
+            confetti.style.fontSize =
+                (12 +
+                Math.random() * 15) +
+                "px";
+
+
+            confetti.style.animationDuration =
+                (1.5 +
+                Math.random() * 2) +
+                "s";
+
+
+            document.body.appendChild(
+                confetti
+            );
+
+
+            setTimeout(() => {
+
+                confetti.remove();
+
+            }, 4000);
+
+        }
+
+    }
+
+
+    /* =========================
+       LOAD QUESTION
+    ========================= */
+
+    function loadQuestion() {
+
+        const q =
+            questions[currentQuestion];
+
+
+        question.innerHTML =
+            q.question;
+
+
+        yes.innerHTML =
+            q.yes;
+
+
+        no.innerHTML =
+            q.no;
+
+
+        counter.innerHTML =
+            "Question " +
+            (currentQuestion + 1) +
+            " / " +
+            questions.length;
+
+
+        scoreText.innerHTML =
+            "❤️ Love points: " +
+            score;
+
+
+        progressBar.style.width =
+            (
+                ((currentQuestion + 1) /
+                questions.length) *
+                100
+            ) +
+            "%";
+
+
+        yesSize = 1;
+
+        noSize = 1;
+
+
+        yes.style.transform =
+            "scale(1)";
+
+
+        no.style.transform =
+            "scale(1)";
+
+
+        yes.style.position =
+            "static";
+
+
+        no.style.position =
+            "static";
+
+
+        yes.style.left = "0";
+
+        yes.style.top = "0";
+
+        no.style.left = "0";
+
+        no.style.top = "0";
+
+
+        buttons.style.display =
+            "flex";
+
+
+        next.style.display =
+            "none";
+
+
+        message.style.display =
+            "none";
+
+    }
+
+
+    /* =========================
+       NO BUTTON
+    ========================= */
+
+    no.addEventListener(
+        "click",
+        () => {
+
+            noSound();
+
+
+            box.classList.remove(
+                "shake"
+            );
+
+            void box.offsetWidth;
+
+            box.classList.add(
+                "shake"
+            );
+
+
+            yesSize +=
+                0.25;
+
+
+            yes.style.transform =
+                `scale(${yesSize})`;
+
+
+            noSize -=
+                0.15;
+
+
+            if (
+                noSize < 0.25
+            ) {
+
+                noSize = 0.25;
+
+            }
+
+
+            no.style.transform =
+                `scale(${noSize})`;
+
+
+            no.style.position =
+                "relative";
+
+
+            const x =
+                Math.random() *
+                280 -
+                140;
+
+
+            const y =
+                Math.random() *
+                180 -
+                90;
+
+
+            no.style.left =
+                x + "px";
+
+
+            no.style.top =
+                y + "px";
+
+
+            question.innerHTML =
+                "😈 Nice try! Choose again!";
+
+
+            setTimeout(() => {
+
+                question.innerHTML =
+                    questions[
+                        currentQuestion
+                    ].question;
+
+            }, 900);
+
+        }
+    );
+
+
+    /* =========================
+       YES BUTTON ❤️🎉
+    ========================= */
+
+    yes.addEventListener(
+        "click",
+        () => {
+
+            /* HAPPY SOUND */
+
+            happySound();
+
+
+            /* POINTS */
+
+            score += 10;
+
+
+            /* HAPPY ANIMATION */
+
+            box.classList.remove(
+                "happy"
+            );
+
+            void box.offsetWidth;
+
+            box.classList.add(
+                "happy"
+            );
+
+
+            /* HEARTS */
+
+            createHearts();
+
+
+            /* CONFETTI */
+
+            createConfetti();
+
+
+            /* MESSAGE */
+
+            const happyMessages = [
+
+                "YEEEESSS! 😍❤️",
+
+                "I KNEW IT! 😂❤️",
+
+                "AWWW! 🥹💕",
+
+                "THAT'S THE ANSWER! 🎉❤️",
+
+                "YOU MADE THE RIGHT CHOICE! 😎❤️",
+
+                "LET'S GOOOO! 🔥❤️"
+
+            ];
+
+
+            message.innerHTML =
+                happyMessages[
+                    Math.floor(
+                        Math.random() *
+                        happyMessages.length
+                    )
+                ];
+
+
+            /* HIDE ANSWERS */
+
+            buttons.style.display =
+                "none";
+
+
+            /* SHOW NEXT */
+
+            next.style.display =
+                "inline-block";
+
+
+            /* SHOW MESSAGE */
+
+            message.style.display =
+                "block";
+
+
+            /* UPDATE SCORE */
+
+            scoreText.innerHTML =
+                "❤️ Love points: " +
+                score;
+
+        }
+    );
+
+
+    /* =========================
+       NEXT
+    ========================= */
+
+    next.addEventListener(
+        "click",
+        () => {
+
+            currentQuestion++;
+
+
+            if (
+                currentQuestion >=
+                questions.length
+            ) {
+
+                finishGame();
+
+            } else {
+
+                loadQuestion();
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       FINISH
+    ========================= */
+
+    function finishGame() {
+
+        winSound();
+
+        createHearts();
+
+        createConfetti();
+
+
+        question.innerHTML =
+            "🎉 YOU DID IT! 🎉";
+
+
+        counter.innerHTML =
+            "🏆 FINAL RESULT";
+
+
+        scoreText.innerHTML =
+            "❤️ Your score: " +
+            score +
+            " / " +
+            questions.length * 10;
+
+
+        buttons.style.display =
+            "none";
+
+
+        next.style.display =
+            "none";
+
+
+        message.style.display =
+            "block";
+
+
+        message.innerHTML =
+            "I KNEW YOU WOULD SAY YES! 😂❤️<br><br>" +
+            "You can't escape love 😈💕";
+
+
+        copyLink.style.display =
+            "inline-block";
+
+
+        shareBtn.style.display =
+            "inline-block";
+
+
+        playAgain.style.display =
+            "inline-block";
+
+    }
+
+
+    /* =========================
+       COPY LINK
+    ========================= */
+
+    copyLink.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await navigator.clipboard
+                    .writeText(
+                        window.location.href
+                    );
+
+
+                copyLink.innerHTML =
+                    "✅ Link Copied!";
+
+
+                setTimeout(() => {
+
+                    copyLink.innerHTML =
+                        "🔗 Copy Link";
+
+                }, 2000);
+
+
+            } catch {
+
+                alert(
+                    "Copy failed 😭"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       SHARE
+    ========================= */
+
+    shareBtn.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await navigator.clipboard
+                    .writeText(
+                        window.location.href
+                    );
+
+
+                shareBtn.innerHTML =
+                    "✅ Link Copied!";
+
+
+                setTimeout(() => {
+
+                    shareBtn.innerHTML =
+                        "📤 Share";
+
+                }, 2000);
+
+            } catch {
+
+                alert(
+                    "Copy failed 😭"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       PLAY AGAIN
+    ========================= */
+
+    playAgain.addEventListener(
+        "click",
+        () => {
+
+            currentQuestion = 0;
+
+            score = 0;
+
+
+            copyLink.style.display =
+                "none";
+
+
+            shareBtn.style.display =
+                "none";
+
+
+            playAgain.style.display =
+                "none";
+
+
+            loadQuestion();
+
+        }
+    );
+
+
+    /* =========================
+       START
+    ========================= */
+
+    loadQuestion();
+
+</script>
+
+</body>
+</html>
