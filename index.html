@@ -4,797 +4,2664 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Prank Love ❤️</title>
+    <title>ZouTools 🚀</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background:
-                linear-gradient(135deg, #ff758c, #ff7eb3);
-
-            font-family: Arial, sans-serif;
-
-            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #222;
         }
 
-        .box {
-            background: white;
-
-            width: 460px;
-            max-width: 90%;
-
-            padding: 35px 25px;
-
-            border-radius: 28px;
-
-            text-align: center;
-
-            box-shadow:
-                0 20px 50px rgba(0,0,0,0.25);
-
-            position: relative;
-
-            transition: 0.3s;
-        }
-
-        h1 {
-            color: #ff477e;
-
-            margin-bottom: 18px;
-
-            line-height: 1.3;
-        }
-
-        #counter {
-            color: #888;
-
-            font-size: 14px;
-
-            margin-bottom: 10px;
-        }
-
-        #score {
-            color: #ff477e;
-
-            font-weight: bold;
-
-            margin-bottom: 20px;
-        }
-
-        /* PROGRESS BAR */
-
-        .progress {
-            width: 100%;
-
-            height: 8px;
-
-            background: #eee;
-
-            border-radius: 20px;
-
-            overflow: hidden;
-
-            margin-bottom: 22px;
-        }
-
-        #progressBar {
-            height: 100%;
-
-            width: 10%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff477e,
-                    #ff9abc
-                );
-
-            transition: 0.4s;
-        }
-
-        /* BUTTONS */
-
-        .buttons {
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 18px;
-
-            min-height: 90px;
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
         }
 
         button {
-            border: none;
-
-            border-radius: 14px;
-
-            padding: 13px 24px;
-
-            font-size: 17px;
-
             cursor: pointer;
-
-            transition: 0.25s;
-
-            margin: 5px;
         }
 
-        button:hover {
-            transform: scale(1.08);
-        }
+        /* =========================
+           HEADER
+        ========================= */
 
-        #yes {
-            background: #ff477e;
-
+        header {
+            background: linear-gradient(135deg, #6c5ce7, #0984e3);
             color: white;
-
-            box-shadow:
-                0 8px 20px rgba(255,71,126,0.3);
+            padding: 55px 20px 45px;
+            text-align: center;
         }
 
-        #no {
-            background: #e5e5e5;
-
-            color: #333;
+        header h1 {
+            margin: 0;
+            font-size: clamp(38px, 7vw, 62px);
         }
 
-        #next,
-        #copyLink,
-        #shareBtn,
-        #playAgain {
-
-            background: #ff477e;
-
-            color: white;
-
-            display: none;
+        header p {
+            margin: 12px auto 0;
+            max-width: 650px;
+            font-size: 18px;
+            opacity: 0.92;
         }
 
-        /* MESSAGE */
-
-        #message {
-
-            display: none;
-
-            font-size: 25px;
-
-            color: #ff477e;
-
-            font-weight: bold;
-
-            margin-top: 20px;
-
-            animation:
-                pop 0.6s ease;
+        .header-badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 8px 15px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.18);
+            font-size: 14px;
         }
 
-        @keyframes pop {
+        /* =========================
+           NAV
+        ========================= */
 
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
-            }
-
-            70% {
-                transform: scale(1.15);
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-        }
-
-        /* SUCCESS EFFECT */
-
-        .happy {
-
-            animation:
-                happyBox 0.7s ease;
-        }
-
-        @keyframes happyBox {
-
-            0% {
-                transform: scale(1);
-            }
-
-            40% {
-                transform: scale(1.08) rotate(-2deg);
-            }
-
-            70% {
-                transform: scale(1.05) rotate(2deg);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-
-        }
-
-        /* FLOATING HEART */
-
-        .heart {
-
-            position: fixed;
-
-            font-size: 28px;
-
-            pointer-events: none;
-
-            z-index: 999;
-
-            animation:
-                heartFly 2.2s ease-out forwards;
-        }
-
-        @keyframes heartFly {
-
-            0% {
-
-                transform:
-                    translateY(0)
-                    scale(0.5);
-
-                opacity: 1;
-            }
-
-            100% {
-
-                transform:
-                    translateY(-550px)
-                    translateX(var(--move))
-                    rotate(360deg)
-                    scale(1.5);
-
-                opacity: 0;
-            }
-
-        }
-
-        /* CONFETTI */
-
-        .confetti {
-
-            position: fixed;
-
-            width: 10px;
-            height: 15px;
-
-            top: -20px;
-
+        nav {
+            position: sticky;
+            top: 0;
             z-index: 1000;
-
-            pointer-events: none;
-
-            animation:
-                fall 2.5s linear forwards;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e9edf5;
         }
 
-        @keyframes fall {
+        .nav-inner {
+            max-width: 1150px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 20px;
+        }
 
-            0% {
+        .logo {
+            font-size: 21px;
+            font-weight: 800;
+            color: #6c5ce7;
+            white-space: nowrap;
+        }
 
-                transform:
-                    translateY(0)
-                    rotate(0deg);
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
 
-                opacity: 1;
-            }
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
 
-            100% {
+        .nav-links button {
+            border: none;
+            background: #f1f3f8;
+            color: #333;
+            padding: 9px 13px;
+            border-radius: 10px;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
 
-                transform:
-                    translateY(110vh)
-                    rotate(720deg);
+        .nav-links button:hover {
+            background: #e6e9f5;
+        }
 
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 35px 20px 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        .section-title p {
+            color: #6c7280;
+            margin: 0;
+        }
+
+        /* =========================
+           TOOL GRID
+        ========================= */
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid #eceff5;
+            border-radius: 22px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(38, 49, 77, 0.08);
+            transition: 0.25s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 38px rgba(38, 49, 77, 0.13);
+        }
+
+        .tool-icon {
+            font-size: 46px;
+            margin-bottom: 12px;
+        }
+
+        .tool-card h3 {
+            margin: 0 0 10px;
+            font-size: 22px;
+        }
+
+        .tool-card p {
+            color: #6c7280;
+            min-height: 45px;
+            line-height: 1.5;
+        }
+
+        .primary-btn {
+            border: none;
+            background: linear-gradient(135deg, #6c5ce7, #0984e3);
+            color: white;
+            padding: 11px 16px;
+            border-radius: 11px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.04);
+        }
+
+        .secondary-btn {
+            border: none;
+            background: #eef1f7;
+            color: #333;
+            padding: 11px 16px;
+            border-radius: 11px;
+            font-weight: 700;
+        }
+
+        .danger-btn {
+            border: none;
+            background: #ffebee;
+            color: #d63031;
+            padding: 11px 16px;
+            border-radius: 11px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           TOOL PAGES
+        ========================= */
+
+        .tool-page {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .tool-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
                 opacity: 0;
+                transform: translateY(12px);
             }
-
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* SHAKE */
-
-        .shake {
-
-            animation:
-                shake 0.35s;
+        .tool-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border: 1px solid #eceff5;
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(38, 49, 77, 0.08);
         }
 
-        @keyframes shake {
-
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-10px);
-            }
-
-            50% {
-                transform: translateX(10px);
-            }
-
-            75% {
-                transform: translateX(-10px);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-
+        .back-btn {
+            border: none;
+            background: transparent;
+            color: #6c5ce7;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding: 0;
         }
 
-        .smallText {
+        .tool-box h2 {
+            margin-top: 0;
+        }
 
-            color: #999;
+        .field {
+            margin-bottom: 16px;
+        }
 
-            font-size: 13px;
+        .field label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
 
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #dfe3ec;
+            border-radius: 11px;
+            outline: none;
+            font-size: 16px;
+            background: white;
+        }
+
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: #6c5ce7;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-top: 15px;
         }
 
+        .result-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: #f6f7ff;
+            border-radius: 15px;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           CALCULATOR
+        ========================= */
+
+        .calc-display {
+            width: 100%;
+            padding: 18px;
+            font-size: 28px;
+            border: 1px solid #dfe3ec;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            text-align: right;
+            background: #fafbfe;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-grid button {
+            border: none;
+            padding: 18px 10px;
+            border-radius: 13px;
+            background: #f0f2f8;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .calc-grid button:hover {
+            background: #e5e8f2;
+        }
+
+        .calc-grid .operator {
+            background: #e7e2ff;
+            color: #5d45d6;
+        }
+
+        .calc-grid .equal {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        /* =========================
+           LOVE PRANK
+        ========================= */
+
+        .love-game {
+            text-align: center;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .love-card {
+            position: relative;
+            overflow: hidden;
+            padding: 35px 25px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
+        }
+
+        .love-counter {
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+
+        .love-progress {
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        #loveProgressBar {
+            height: 100%;
+            width: 10%;
+            background: white;
+            border-radius: 20px;
+            transition: 0.4s;
+        }
+
+        #loveQuestion {
+            font-size: clamp(25px, 5vw, 38px);
+            line-height: 1.3;
+        }
+
+        .love-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 90px;
+            flex-wrap: wrap;
+        }
+
+        .love-yes {
+            border: none;
+            background: white;
+            color: #ff477e;
+            padding: 13px 22px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .love-no {
+            border: none;
+            background: rgba(255,255,255,0.75);
+            color: #333;
+            padding: 13px 22px;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+
+        #loveMessage {
+            font-size: 24px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 28px;
+            animation: heartFly 2.2s ease-out forwards;
+        }
+
+        @keyframes heartFly {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(0.7);
+            }
+            to {
+                opacity: 0;
+                transform:
+                    translateY(-500px)
+                    translateX(var(--move))
+                    rotate(360deg)
+                    scale(1.6);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            top: -25px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: confettiFall 2.4s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           TIMER
+        ========================= */
+
+        .timer-display {
+            text-align: center;
+            font-size: 72px;
+            font-weight: 800;
+            color: #6c5ce7;
+            margin: 20px 0;
+        }
+
+        .timer-mode {
+            text-align: center;
+            font-weight: 700;
+            color: #6c7280;
+        }
+
+        .timer-inputs {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .timer-inputs > * {
+            flex: 1;
+        }
+
+        /* =========================
+           RANDOM PICKER
+        ========================= */
+
+        .random-result {
+            font-size: 38px;
+            font-weight: 800;
+            text-align: center;
+            color: #6c5ce7;
+            padding: 25px;
+            background: #f6f7ff;
+            border-radius: 18px;
+            margin-top: 20px;
+            word-break: break-word;
+        }
+
+        /* =========================
+           ABOUT
+        ========================= */
+
+        .info-card {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid #eceff5;
+            box-shadow: 0 10px 30px rgba(38, 49, 77, 0.08);
+            line-height: 1.8;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #777;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+            .nav-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .timer-display {
+                font-size: 52px;
+            }
+
+            .tool-box {
+                padding: 20px;
+            }
+
+            .love-buttons button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
     </style>
 </head>
 
-
 <body>
 
-    <div class="box" id="box">
+<!-- =========================
+     HEADER
+========================= -->
 
-        <div id="counter">
-            Question 1 / 10
-        </div>
+<header>
+    <h1>🚀 ZouTools</h1>
 
-        <div class="progress">
-            <div id="progressBar"></div>
-        </div>
+    <p>
+        Free, simple and useful tools for everyday life.
+    </p>
 
-        <div id="score">
-            ❤️ Love points: 0
-        </div>
-
-
-        <h1 id="question">
-            Do you love me? ❤️
-        </h1>
-
-
-        <div class="buttons" id="buttons">
-
-            <button id="yes">
-                Yes ❤️
-            </button>
-
-            <button id="no">
-                No 😭
-            </button>
-
-        </div>
-
-
-        <button id="next">
-            Next ➡️
-        </button>
-
-
-        <div id="message"></div>
-
-
-        <div id="finalButtons">
-
-            <button id="copyLink">
-                🔗 Copy Link
-            </button>
-
-            <button id="shareBtn">
-                📤 Share
-            </button>
-
-            <button id="playAgain">
-                🔄 Play Again
-            </button>
-
-        </div>
-
-
-        <div class="smallText">
-            Made with ❤️
-        </div>
-
+    <div class="header-badge">
+        ⚡ Fast • Free • Easy
     </div>
+</header>
+
+
+<!-- =========================
+     NAV
+========================= -->
+
+<nav>
+    <div class="nav-inner">
+
+        <div class="logo">
+            ZouTools
+        </div>
+
+        <div class="nav-links">
+
+            <button onclick="showHome()">
+                🏠 Home
+            </button>
+
+            <button onclick="openTool('love')">
+                ❤️ Love
+            </button>
+
+            <button onclick="openTool('calculator')">
+                🧮 Calculator
+            </button>
+
+            <button onclick="openTool('grades')">
+                🎓 Grades
+            </button>
+
+            <button onclick="openTool('timer')">
+                ⏱️ Timer
+            </button>
+
+            <button onclick="openTool('random')">
+                🎲 Random
+            </button>
+
+            <button onclick="openTool('text')">
+                🔤 Text
+            </button>
+
+            <button onclick="openTool('countdown')">
+                📅 Countdown
+            </button>
+
+        </div>
+    </div>
+</nav>
+
+
+<main>
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
+    <section id="homePage">
+
+        <div class="section-title">
+
+            <h2>Choose a tool 👇</h2>
+
+            <p>
+                Everything in one place.
+            </p>
+
+        </div>
+
+
+        <div class="tools-grid">
+
+            <div class="tool-card">
+
+                <div class="tool-icon">❤️</div>
+
+                <h3>Love Prank</h3>
+
+                <p>
+                    Funny questions, escaping No button,
+                    hearts and surprises.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('love')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🧮</div>
+
+                <h3>Calculator</h3>
+
+                <p>
+                    Simple calculator for everyday math.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('calculator')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🎓</div>
+
+                <h3>Grade Calculator</h3>
+
+                <p>
+                    Calculate your average using grades
+                    and coefficients.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('grades')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">⏱️</div>
+
+                <h3>Study Timer</h3>
+
+                <p>
+                    Focus on studying with a Pomodoro timer.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('timer')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🎲</div>
+
+                <h3>Random Picker</h3>
+
+                <p>
+                    Pick a random number or choose a random name.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('random')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🔤</div>
+
+                <h3>Text Tools</h3>
+
+                <p>
+                    Count words, letters and characters,
+                    or change text case.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('text')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">📅</div>
+
+                <h3>Countdown</h3>
+
+                <p>
+                    Count how much time remains until a date.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openTool('countdown')"
+                >
+                    Open Tool
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOVE PRANK
+    ========================= -->
+
+    <section id="lovePage" class="tool-page">
+
+        <div class="tool-box love-game">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <div class="love-card">
+
+                <div
+                    class="love-counter"
+                    id="loveCounter"
+                >
+                    Question 1 / 10
+                </div>
+
+
+                <div class="love-progress">
+
+                    <div
+                        id="loveProgressBar"
+                    ></div>
+
+                </div>
+
+
+                <div id="loveScore">
+                    ❤️ Love points: 0
+                </div>
+
+
+                <h2 id="loveQuestion">
+                    Do you love me? ❤️
+                </h2>
+
+
+                <div
+                    class="love-buttons"
+                    id="loveButtons"
+                >
+
+                    <button
+                        class="love-yes"
+                        id="loveYes"
+                    >
+                        Yes ❤️
+                    </button>
+
+                    <button
+                        class="love-no"
+                        id="loveNo"
+                    >
+                        No 😭
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="love-yes"
+                    id="loveNext"
+                    style="display:none"
+                >
+                    Next ➡️
+                </button>
+
+
+                <div
+                    id="loveMessage"
+                    style="display:none"
+                ></div>
+
+
+                <button
+                    class="love-yes"
+                    id="loveAgain"
+                    style="display:none"
+                >
+                    🔄 Play Again
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CALCULATOR
+    ========================= -->
+
+    <section
+        id="calculatorPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>🧮 Calculator</h2>
+
+            <input
+                class="calc-display"
+                id="calcDisplay"
+                value="0"
+                readonly
+            >
+
+            <div class="calc-grid">
+
+                <button onclick="calcClear()">C</button>
+                <button onclick="calcBack()">⌫</button>
+                <button onclick="calcInput('%')">%</button>
+                <button
+                    class="operator"
+                    onclick="calcInput('/')"
+                >÷</button>
+
+                <button onclick="calcInput('7')">7</button>
+                <button onclick="calcInput('8')">8</button>
+                <button onclick="calcInput('9')">9</button>
+                <button
+                    class="operator"
+                    onclick="calcInput('*')"
+                >×</button>
+
+                <button onclick="calcInput('4')">4</button>
+                <button onclick="calcInput('5')">5</button>
+                <button onclick="calcInput('6')">6</button>
+                <button
+                    class="operator"
+                    onclick="calcInput('-')"
+                >−</button>
+
+                <button onclick="calcInput('1')">1</button>
+                <button onclick="calcInput('2')">2</button>
+                <button onclick="calcInput('3')">3</button>
+                <button
+                    class="operator"
+                    onclick="calcInput('+')"
+                >+</button>
+
+                <button onclick="calcInput('0')">0</button>
+                <button onclick="calcInput('.')">.</button>
+                <button
+                    class="equal"
+                    onclick="calcResult()"
+                    style="grid-column: span 2"
+                >=</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         GRADES
+    ========================= -->
+
+    <section
+        id="gradesPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>🎓 Grade Calculator</h2>
+
+            <p style="color:#6c7280">
+                Enter your grades and coefficients.
+            </p>
+
+            <div id="gradeRows">
+
+                <div
+                    class="grade-row"
+                    style="display:flex;gap:10px;margin-bottom:10px"
+                >
+
+                    <input
+                        type="number"
+                        class="grade"
+                        placeholder="Grade"
+                        min="0"
+                        max="20"
+                        step="0.01"
+                        style="flex:1"
+                    >
+
+                    <input
+                        type="number"
+                        class="coef"
+                        placeholder="Coefficient"
+                        min="0"
+                        step="0.1"
+                        value="1"
+                        style="flex:1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    class="secondary-btn"
+                    onclick="addGradeRow()"
+                >
+                    + Add subject
+                </button>
+
+                <button
+                    class="primary-btn"
+                    onclick="calculateGrades()"
+                >
+                    Calculate
+                </button>
+
+            </div>
+
+
+            <div
+                id="gradeResult"
+                class="result-box"
+                style="display:none"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         STUDY TIMER
+    ========================= -->
+
+    <section
+        id="timerPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>⏱️ Study Timer</h2>
+
+            <div class="timer-mode" id="timerMode">
+                Study session
+            </div>
+
+
+            <div
+                class="timer-display"
+                id="timerDisplay"
+            >
+                25:00
+            </div>
+
+
+            <div class="timer-inputs">
+
+                <input
+                    id="studyMinutes"
+                    type="number"
+                    min="1"
+                    value="25"
+                    placeholder="Study minutes"
+                    class="field-input"
+                    style="padding:12px;border:1px solid #dfe3ec;border-radius:10px"
+                >
+
+                <input
+                    id="breakMinutes"
+                    type="number"
+                    min="1"
+                    value="5"
+                    placeholder="Break minutes"
+                    style="padding:12px;border:1px solid #dfe3ec;border-radius:10px"
+                >
+
+            </div>
+
+
+            <div class="button-row" style="justify-content:center">
+
+                <button
+                    class="primary-btn"
+                    onclick="startTimer()"
+                >
+                    ▶ Start
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="pauseTimer()"
+                >
+                    ⏸ Pause
+                </button>
+
+                <button
+                    class="danger-btn"
+                    onclick="resetTimer()"
+                >
+                    ↻ Reset
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RANDOM PICKER
+    ========================= -->
+
+    <section
+        id="randomPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>🎲 Random Picker</h2>
+
+
+            <div class="field">
+
+                <label>
+                    Choose mode
+                </label>
+
+                <select id="randomMode">
+
+                    <option value="number">
+                        Random number
+                    </option>
+
+                    <option value="name">
+                        Random name
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="numberRandomInputs">
+
+                <div class="field">
+
+                    <label>
+                        Minimum
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minNumber"
+                        value="1"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Maximum
+                    </label>
+
+                    <input
+                        type="number"
+                        id="maxNumber"
+                        value="100"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="nameRandomInputs"
+                style="display:none"
+            >
+
+                <div class="field">
+
+                    <label>
+                        Names (one per line)
+                    </label>
+
+                    <textarea
+                        id="namesInput"
+                        rows="7"
+                        placeholder="Ahmed&#10;Yassine&#10;Zoubair"
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="pickRandom()"
+            >
+                🎯 Pick
+            </button>
+
+
+            <div
+                id="randomResult"
+                class="random-result"
+            >
+                ?
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TEXT TOOLS
+    ========================= -->
+
+    <section
+        id="textPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>🔤 Text Tools</h2>
+
+
+            <div class="field">
+
+                <label>
+                    Write your text
+                </label>
+
+                <textarea
+                    id="textInput"
+                    rows="10"
+                    placeholder="Write something here..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    class="primary-btn"
+                    onclick="textUpper()"
+                >
+                    UPPERCASE
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="textLower()"
+                >
+                    lowercase
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="textCapitalize()"
+                >
+                    Capitalize
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="countText()"
+                >
+                    Count
+                </button>
+
+                <button
+                    class="danger-btn"
+                    onclick="clearText()"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+
+            <div
+                id="textResult"
+                class="result-box"
+                style="display:none"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         COUNTDOWN
+    ========================= -->
+
+    <section
+        id="countdownPage"
+        class="tool-page"
+    >
+
+        <div class="tool-box">
+
+            <button
+                class="back-btn"
+                onclick="showHome()"
+            >
+                ← Back to tools
+            </button>
+
+            <h2>📅 Countdown</h2>
+
+
+            <div class="field">
+
+                <label>
+                    Choose date and time
+                </label>
+
+                <input
+                    type="datetime-local"
+                    id="countdownDate"
+                >
+
+            </div>
+
+
+            <div class="button-row">
+
+                <button
+                    class="primary-btn"
+                    onclick="startCountdown()"
+                >
+                    🚀 Start Countdown
+                </button>
+
+                <button
+                    class="danger-btn"
+                    onclick="stopCountdown()"
+                >
+                    Stop
+                </button>
+
+            </div>
+
+
+            <div
+                id="countdownResult"
+                class="result-box"
+            >
+                Choose a date to start.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <section
+        id="aboutPage"
+        class="tool-page"
+    >
+
+        <div class="info-card">
+
+            <h2>ℹ️ About ZouTools</h2>
+
+            <p>
+                ZouTools is a collection of simple,
+                free and useful tools designed to make
+                everyday tasks easier.
+            </p>
+
+            <p>
+                We are starting with small tools and
+                will keep adding more features over time.
+            </p>
+
+            <p>
+                ❤️ Built with HTML, CSS and JavaScript.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 ZouTools — Made with ❤️ by Zoubair
+</footer>
 
 
 <script>
 
     /* =========================
-       QUESTIONS
+       NAVIGATION
     ========================= */
 
-    const questions = [
+    const pages = [
+        "lovePage",
+        "calculatorPage",
+        "gradesPage",
+        "timerPage",
+        "randomPage",
+        "textPage",
+        "countdownPage",
+        "aboutPage"
+    ];
+
+
+    function hideAllPages() {
+
+        pages.forEach(id => {
+
+            document.getElementById(id)
+                .classList.remove("active");
+
+        });
+
+        document.getElementById("homePage")
+            .style.display = "none";
+    }
+
+
+    function showHome() {
+
+        pages.forEach(id => {
+
+            document.getElementById(id)
+                .classList.remove("active");
+
+        });
+
+        document.getElementById("homePage")
+            .style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function openTool(tool) {
+
+        hideAllPages();
+
+        const map = {
+
+            love: "lovePage",
+
+            calculator: "calculatorPage",
+
+            grades: "gradesPage",
+
+            timer: "timerPage",
+
+            random: "randomPage",
+
+            text: "textPage",
+
+            countdown: "countdownPage",
+
+            about: "aboutPage"
+
+        };
+
+
+        const page = document.getElementById(
+            map[tool]
+        );
+
+
+        if (page) {
+
+            page.classList.add("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+    }
+
+
+    /* =========================
+       CALCULATOR
+    ========================= */
+
+    const calcDisplay =
+        document.getElementById(
+            "calcDisplay"
+        );
+
+
+    function calcInput(value) {
+
+        if (calcDisplay.value === "0") {
+
+            calcDisplay.value = value;
+
+        } else {
+
+            calcDisplay.value += value;
+
+        }
+
+    }
+
+
+    function calcClear() {
+
+        calcDisplay.value = "0";
+
+    }
+
+
+    function calcBack() {
+
+        calcDisplay.value =
+            calcDisplay.value.slice(0, -1);
+
+        if (
+            calcDisplay.value === ""
+        ) {
+
+            calcDisplay.value = "0";
+
+        }
+
+    }
+
+
+    function calcResult() {
+
+        try {
+
+            let expression =
+                calcDisplay.value;
+
+            expression =
+                expression.replace(
+                    /%/g,
+                    "/100"
+                );
+
+            if (
+                !/^[0-9+\-*/.() ]+$/.test(
+                    expression
+                )
+            ) {
+                throw new Error();
+            }
+
+            const result =
+                Function(
+                    "return " +
+                    expression
+                )();
+
+            if (
+                !Number.isFinite(result)
+            ) {
+                throw new Error();
+            }
+
+            calcDisplay.value =
+                Number(
+                    result.toFixed(10)
+                );
+
+        } catch {
+
+            calcDisplay.value =
+                "Error";
+
+            setTimeout(
+                calcClear,
+                1000
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       GRADES
+    ========================= */
+
+    function addGradeRow() {
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+        row.className =
+            "grade-row";
+
+        row.style =
+            "display:flex;gap:10px;margin-bottom:10px";
+
+        row.innerHTML = `
+
+            <input
+                type="number"
+                class="grade"
+                placeholder="Grade"
+                min="0"
+                max="20"
+                step="0.01"
+                style="flex:1"
+            >
+
+            <input
+                type="number"
+                class="coef"
+                placeholder="Coefficient"
+                min="0"
+                step="0.1"
+                value="1"
+                style="flex:1"
+            >
+
+        `;
+
+
+        document.getElementById(
+            "gradeRows"
+        ).appendChild(row);
+
+    }
+
+
+    function calculateGrades() {
+
+        const grades =
+            document.querySelectorAll(
+                ".grade"
+            );
+
+        const coefs =
+            document.querySelectorAll(
+                ".coef"
+            );
+
+
+        let weightedSum = 0;
+
+        let coefSum = 0;
+
+        let valid = 0;
+
+
+        for (
+            let i = 0;
+            i < grades.length;
+            i++
+        ) {
+
+            const grade =
+                parseFloat(
+                    grades[i].value
+                );
+
+            const coef =
+                parseFloat(
+                    coefs[i].value
+                );
+
+
+            if (
+                Number.isFinite(grade) &&
+                Number.isFinite(coef) &&
+                coef > 0
+            ) {
+
+                weightedSum +=
+                    grade * coef;
+
+                coefSum +=
+                    coef;
+
+                valid++;
+
+            }
+
+        }
+
+
+        const resultBox =
+            document.getElementById(
+                "gradeResult"
+            );
+
+
+        resultBox.style.display =
+            "block";
+
+
+        if (
+            valid === 0 ||
+            coefSum === 0
+        ) {
+
+            resultBox.innerHTML =
+                "❌ Enter at least one valid grade.";
+
+            return;
+
+        }
+
+
+        const average =
+            weightedSum / coefSum;
+
+
+        let message =
+            "Your average is " +
+            average.toFixed(2) +
+            " / 20";
+
+
+        if (average >= 16) {
+
+            message +=
+                "<br>🔥 Excellent!";
+
+        } else if (
+            average >= 14
+        ) {
+
+            message +=
+                "<br>👏 Very good!";
+
+        } else if (
+            average >= 10
+        ) {
+
+            message +=
+                "<br>✅ You passed!";
+
+        } else {
+
+            message +=
+                "<br>💪 Keep working!";
+
+        }
+
+
+        resultBox.innerHTML =
+            message;
+
+    }
+
+
+    /* =========================
+       STUDY TIMER
+    ========================= */
+
+    let timerInterval = null;
+
+    let timerSeconds = 25 * 60;
+
+    let timerRunning = false;
+
+    let timerIsStudy = true;
+
+
+    function formatTime(seconds) {
+
+        const min =
+            Math.floor(seconds / 60)
+                .toString()
+                .padStart(2, "0");
+
+        const sec =
+            (seconds % 60)
+                .toString()
+                .padStart(2, "0");
+
+        return min + ":" + sec;
+
+    }
+
+
+    function updateTimerDisplay() {
+
+        document.getElementById(
+            "timerDisplay"
+        ).textContent =
+            formatTime(timerSeconds);
+
+        document.getElementById(
+            "timerMode"
+        ).textContent =
+            timerIsStudy
+                ? "📚 Study session"
+                : "☕ Break time";
+
+    }
+
+
+    function startTimer() {
+
+        if (timerRunning) {
+            return;
+        }
+
+
+        if (timerSeconds <= 0) {
+
+            resetTimer();
+
+        }
+
+
+        timerRunning = true;
+
+
+        timerInterval =
+            setInterval(() => {
+
+                timerSeconds--;
+
+                updateTimerDisplay();
+
+
+                if (
+                    timerSeconds <= 0
+                ) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+                    timerInterval = null;
+
+                    timerRunning = false;
+
+
+                    if (timerIsStudy) {
+
+                        timerIsStudy = false;
+
+                        timerSeconds =
+                            Math.max(
+                                1,
+                                parseInt(
+                                    document.getElementById(
+                                        "breakMinutes"
+                                    ).value
+                                ) || 5
+                            ) * 60;
+
+                    } else {
+
+                        timerIsStudy = true;
+
+                        timerSeconds =
+                            Math.max(
+                                1,
+                                parseInt(
+                                    document.getElementById(
+                                        "studyMinutes"
+                                    ).value
+                                ) || 25
+                            ) * 60;
+
+                    }
+
+
+                    updateTimerDisplay();
+
+                    alert(
+                        timerIsStudy
+                            ? "📚 Break finished! Time to study!"
+                            : "🎉 Study session finished! Take a break!"
+                    );
+
+                }
+
+            }, 1000);
+
+    }
+
+
+    function pauseTimer() {
+
+        clearInterval(
+            timerInterval
+        );
+
+        timerInterval = null;
+
+        timerRunning = false;
+
+    }
+
+
+    function resetTimer() {
+
+        pauseTimer();
+
+        timerIsStudy = true;
+
+        timerSeconds =
+            Math.max(
+                1,
+                parseInt(
+                    document.getElementById(
+                        "studyMinutes"
+                    ).value
+                ) || 25
+            ) * 60;
+
+        updateTimerDisplay();
+
+    }
+
+
+    updateTimerDisplay();
+
+
+    /* =========================
+       RANDOM PICKER
+    ========================= */
+
+    document.getElementById(
+        "randomMode"
+    ).addEventListener(
+        "change",
+        function () {
+
+            const numberBox =
+                document.getElementById(
+                    "numberRandomInputs"
+                );
+
+            const nameBox =
+                document.getElementById(
+                    "nameRandomInputs"
+                );
+
+
+            if (
+                this.value === "number"
+            ) {
+
+                numberBox.style.display =
+                    "block";
+
+                nameBox.style.display =
+                    "none";
+
+            } else {
+
+                numberBox.style.display =
+                    "none";
+
+                nameBox.style.display =
+                    "block";
+
+            }
+
+        }
+    );
+
+
+    function pickRandom() {
+
+        const mode =
+            document.getElementById(
+                "randomMode"
+            ).value;
+
+        const result =
+            document.getElementById(
+                "randomResult"
+            );
+
+
+        if (mode === "number") {
+
+            const min =
+                parseInt(
+                    document.getElementById(
+                        "minNumber"
+                    ).value
+                );
+
+            const max =
+                parseInt(
+                    document.getElementById(
+                        "maxNumber"
+                    ).value
+                );
+
+
+            if (
+                !Number.isFinite(min) ||
+                !Number.isFinite(max) ||
+                min > max
+            ) {
+
+                result.textContent =
+                    "❌ Invalid range";
+
+                return;
+
+            }
+
+
+            const number =
+                Math.floor(
+                    Math.random() *
+                    (max - min + 1)
+                ) + min;
+
+
+            result.textContent =
+                number;
+
+        } else {
+
+            const names =
+                document.getElementById(
+                    "namesInput"
+                ).value
+                .split(/\n|,/)
+                .map(name =>
+                    name.trim()
+                )
+                .filter(Boolean);
+
+
+            if (
+                names.length === 0
+            ) {
+
+                result.textContent =
+                    "❌ Enter some names";
+
+                return;
+
+            }
+
+
+            const picked =
+                names[
+                    Math.floor(
+                        Math.random() *
+                        names.length
+                    )
+                ];
+
+
+            result.textContent =
+                "🎉 " + picked;
+
+        }
+
+    }
+
+
+    /* =========================
+       TEXT TOOLS
+    ========================= */
+
+    function getText() {
+
+        return document.getElementById(
+            "textInput"
+        );
+
+    }
+
+
+    function textUpper() {
+
+        getText().value =
+            getText().value.toUpperCase();
+
+    }
+
+
+    function textLower() {
+
+        getText().value =
+            getText().value.toLowerCase();
+
+    }
+
+
+    function textCapitalize() {
+
+        getText().value =
+            getText().value
+            .toLowerCase()
+            .replace(
+                /(^|\s)\S/g,
+                letter =>
+                    letter.toUpperCase()
+            );
+
+    }
+
+
+    function countText() {
+
+        const text =
+            getText().value;
+
+
+        const characters =
+            text.length;
+
+
+        const charactersNoSpaces =
+            text.replace(
+                /\s/g,
+                ""
+            ).length;
+
+
+        const words =
+            text.trim() === ""
+                ? 0
+                : text.trim().split(/\s+/).length;
+
+
+        const lines =
+            text === ""
+                ? 0
+                : text.split("\n").length;
+
+
+        const result =
+            document.getElementById(
+                "textResult"
+            );
+
+
+        result.style.display =
+            "block";
+
+
+        result.innerHTML = `
+            🔤 Characters: ${characters}<br>
+            🚫 Without spaces: ${charactersNoSpaces}<br>
+            📝 Words: ${words}<br>
+            📄 Lines: ${lines}
+        `;
+
+    }
+
+
+    function clearText() {
+
+        getText().value = "";
+
+        const result =
+            document.getElementById(
+                "textResult"
+            );
+
+        result.style.display =
+            "none";
+
+    }
+
+
+    /* =========================
+       COUNTDOWN
+    ========================= */
+
+    let countdownInterval = null;
+
+
+    function startCountdown() {
+
+        clearInterval(
+            countdownInterval
+        );
+
+
+        const date =
+            document.getElementById(
+                "countdownDate"
+            ).value;
+
+
+        const result =
+            document.getElementById(
+                "countdownResult"
+            );
+
+
+        if (!date) {
+
+            result.innerHTML =
+                "❌ Choose a date.";
+
+            return;
+
+        }
+
+
+        const target =
+            new Date(date).getTime();
+
+
+        if (
+            target <= Date.now()
+        ) {
+
+            result.innerHTML =
+                "❌ Choose a future date.";
+
+            return;
+
+        }
+
+
+        function updateCountdown() {
+
+            const diff =
+                target - Date.now();
+
+
+            if (diff <= 0) {
+
+                clearInterval(
+                    countdownInterval
+                );
+
+                result.innerHTML =
+                    "🎉 The countdown is finished!";
+
+                return;
+
+            }
+
+
+            const days =
+                Math.floor(
+                    diff /
+                    (1000 * 60 * 60 * 24)
+                );
+
+
+            const hours =
+                Math.floor(
+                    (
+                        diff /
+                        (1000 * 60 * 60)
+                    ) % 24
+                );
+
+
+            const minutes =
+                Math.floor(
+                    (
+                        diff /
+                        (1000 * 60)
+                    ) % 60
+                );
+
+
+            const seconds =
+                Math.floor(
+                    (
+                        diff /
+                        1000
+                    ) % 60
+                );
+
+
+            result.innerHTML = `
+                ⏳ ${days} days<br>
+                🕐 ${hours} hours<br>
+                ⏱️ ${minutes} minutes<br>
+                ⚡ ${seconds} seconds
+            `;
+
+        }
+
+
+        updateCountdown();
+
+
+        countdownInterval =
+            setInterval(
+                updateCountdown,
+                1000
+            );
+
+    }
+
+
+    function stopCountdown() {
+
+        clearInterval(
+            countdownInterval
+        );
+
+
+        document.getElementById(
+            "countdownResult"
+        ).innerHTML =
+            "⏸️ Countdown stopped.";
+
+    }
+
+
+    /* =========================
+       LOVE PRANK
+    ========================= */
+
+    const loveQuestions = [
 
         {
-            question: "Do you love me? ❤️",
-            yes: "YES ❤️",
-            no: "No 😭"
+            question:
+                "Do you love me? ❤️",
+
+            yes:
+                "YES ❤️",
+
+            no:
+                "No 😭"
+
         },
 
         {
-            question: "Are you really sure? 👀",
-            yes: "Yes ❤️",
-            no: "Maybe... 😭"
+            question:
+                "Are you really sure? 👀",
+
+            yes:
+                "Of course ❤️",
+
+            no:
+                "Maybe... 😭"
+
         },
 
         {
-            question: "Would you choose me over chocolate? 🍫",
-            yes: "Of course ❤️",
-            no: "Never 😂"
+            question:
+                "Would you choose me over chocolate? 🍫",
+
+            yes:
+                "Of course ❤️",
+
+            no:
+                "Never 😂"
+
         },
 
         {
-            question: "Would you miss me if I disappeared? 🥺",
-            yes: "Definitely ❤️",
-            no: "Nope 😎"
+            question:
+                "Would you miss me if I disappeared? 🥺",
+
+            yes:
+                "Definitely ❤️",
+
+            no:
+                "Nope 😎"
+
         },
 
         {
-            question: "Am I your favorite person? 👑",
-            yes: "Obviously ❤️",
-            no: "Not really 😂"
+            question:
+                "Am I your favorite person? 👑",
+
+            yes:
+                "Obviously ❤️",
+
+            no:
+                "Not really 😂"
+
         },
 
         {
-            question: "Would you go on a date with me? 🌹",
-            yes: "LET'S GO ❤️",
-            no: "Maybe later 😭"
+            question:
+                "Would you go on a date with me? 🌹",
+
+            yes:
+                "LET'S GO ❤️",
+
+            no:
+                "Maybe later 😭"
+
         },
 
         {
-            question: "Do I make you smile? 😊",
-            yes: "Always ❤️",
-            no: "Not today 😂"
+            question:
+                "Do I make you smile? 😊",
+
+            yes:
+                "Always ❤️",
+
+            no:
+                "Not today 😂"
+
         },
 
         {
-            question: "Do you trust me? 🤝",
-            yes: "YES ❤️",
-            no: "Hmm 🤨"
+            question:
+                "Do you trust me? 🤝",
+
+            yes:
+                "YES ❤️",
+
+            no:
+                "Hmm 🤨"
+
         },
 
         {
-            question: "Would you stay with me forever? ♾️",
-            yes: "FOREVER ❤️",
-            no: "I need time 😭"
+            question:
+                "Would you stay with me forever? ♾️",
+
+            yes:
+                "FOREVER ❤️",
+
+            no:
+                "I need time 😭"
+
         },
 
         {
-            question: "LAST QUESTION... Do you love me? 😈❤️",
-            yes: "YESSSS ❤️❤️❤️",
-            no: "NO 😭"
+            question:
+                "LAST QUESTION... Do you love me? 😈❤️",
+
+            yes:
+                "YESSSS ❤️❤️❤️",
+
+            no:
+                "NO 😭"
+
         }
 
     ];
 
 
-    /* =========================
-       VARIABLES
-    ========================= */
+    let loveIndex = 0;
 
-    let currentQuestion = 0;
-
-    let score = 0;
+    let loveScore = 0;
 
     let yesSize = 1;
 
     let noSize = 1;
 
 
-    /* =========================
-       ELEMENTS
-    ========================= */
-
-    const question =
-        document.getElementById("question");
-
-    const yes =
-        document.getElementById("yes");
-
-    const no =
-        document.getElementById("no");
-
-    const buttons =
-        document.getElementById("buttons");
-
-    const next =
-        document.getElementById("next");
-
-    const message =
-        document.getElementById("message");
-
-    const counter =
-        document.getElementById("counter");
-
-    const scoreText =
-        document.getElementById("score");
-
-    const box =
-        document.getElementById("box");
-
-    const progressBar =
-        document.getElementById("progressBar");
-
-    const copyLink =
-        document.getElementById("copyLink");
-
-    const shareBtn =
-        document.getElementById("shareBtn");
-
-    const playAgain =
-        document.getElementById("playAgain");
-
-
-    /* =========================
-       SOUND ENGINE
-    ========================= */
-
-    let audioContext;
-
-
-    function startAudio() {
-
-        if (!audioContext) {
-
-            audioContext =
-                new (
-                    window.AudioContext ||
-                    window.webkitAudioContext
-                )();
-
-        }
-
-        if (
-            audioContext.state ===
-            "suspended"
-        ) {
-
-            audioContext.resume();
-
-        }
-
-    }
-
-
-    /* YES SOUND
-       Happy little melody
-    */
-
-    function happySound() {
-
-        startAudio();
-
-        const notes = [
-            523.25,
-            659.25,
-            783.99,
-            1046.50
-        ];
-
-        notes.forEach(
-            (frequency, index) => {
-
-                const oscillator =
-                    audioContext
-                    .createOscillator();
-
-                const gain =
-                    audioContext
-                    .createGain();
-
-
-                oscillator.connect(gain);
-
-                gain.connect(
-                    audioContext.destination
-                );
-
-
-                oscillator.type =
-                    "sine";
-
-                oscillator.frequency.value =
-                    frequency;
-
-
-                gain.gain.setValueAtTime(
-                    0.001,
-                    audioContext.currentTime +
-                    index * 0.12
-                );
-
-
-                gain.gain.exponentialRampToValueAtTime(
-                    0.20,
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.03
-                );
-
-
-                gain.gain.exponentialRampToValueAtTime(
-                    0.001,
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.32
-                );
-
-
-                oscillator.start(
-                    audioContext.currentTime +
-                    index * 0.12
-                );
-
-
-                oscillator.stop(
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.35
-                );
-
-            }
+    const loveQuestion =
+        document.getElementById(
+            "loveQuestion"
         );
 
-    }
+    const loveYes =
+        document.getElementById(
+            "loveYes"
+        );
 
+    const loveNo =
+        document.getElementById(
+            "loveNo"
+        );
 
-    /* NO SOUND */
+    const loveNext =
+        document.getElementById(
+            "loveNext"
+        );
 
-    function noSound() {
+    const loveAgain =
+        document.getElementById(
+            "loveAgain"
+        );
 
-        startAudio();
+    const loveMessage =
+        document.getElementById(
+            "loveMessage"
+        );
 
-        const oscillator =
-            audioContext.createOscillator();
+    const loveCounter =
+        document.getElementById(
+            "loveCounter"
+        );
 
-        const gain =
-            audioContext.createGain();
+    const loveScoreText =
+        document.getElementById(
+            "loveScore"
+        );
 
+    const loveButtons =
+        document.getElementById(
+            "loveButtons"
+        );
 
-        oscillator.connect(gain);
-
-        gain.connect(
-            audioContext.destination
+    const loveProgress =
+        document.getElementById(
+            "loveProgressBar"
         );
 
 
-        oscillator.type =
-            "triangle";
+    function loveLoad() {
 
-        oscillator.frequency.value =
-            150;
-
-
-        gain.gain.value =
-            0.12;
+        const q =
+            loveQuestions[loveIndex];
 
 
-        oscillator.start();
+        loveQuestion.textContent =
+            q.question;
 
 
-        oscillator.stop(
-            audioContext.currentTime +
-            0.25
-        );
-
-    }
+        loveYes.textContent =
+            q.yes;
 
 
-    /* WIN SOUND */
-
-    function winSound() {
-
-        startAudio();
-
-        const notes = [
-            523.25,
-            659.25,
-            783.99,
-            1046.50,
-            1318.51
-        ];
+        loveNo.textContent =
+            q.no;
 
 
-        notes.forEach(
-            (frequency, index) => {
-
-                const oscillator =
-                    audioContext
-                    .createOscillator();
-
-                const gain =
-                    audioContext
-                    .createGain();
+        loveCounter.textContent =
+            "Question " +
+            (loveIndex + 1) +
+            " / " +
+            loveQuestions.length;
 
 
-                oscillator.connect(gain);
-
-                gain.connect(
-                    audioContext.destination
-                );
+        loveScoreText.textContent =
+            "❤️ Love points: " +
+            loveScore;
 
 
-                oscillator.type =
-                    "sine";
-
-                oscillator.frequency.value =
-                    frequency;
-
-
-                gain.gain.setValueAtTime(
-                    0.001,
-                    audioContext.currentTime +
-                    index * 0.12
-                );
+        loveProgress.style.width =
+            (
+                (
+                    (loveIndex + 1) /
+                    loveQuestions.length
+                ) * 100
+            ) + "%";
 
 
-                gain.gain.exponentialRampToValueAtTime(
-                    0.22,
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.03
-                );
+        yesSize = 1;
+
+        noSize = 1;
 
 
-                gain.gain.exponentialRampToValueAtTime(
-                    0.001,
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.45
-                );
+        loveYes.style.transform =
+            "scale(1)";
 
 
-                oscillator.start(
-                    audioContext.currentTime +
-                    index * 0.12
-                );
+        loveNo.style.transform =
+            "scale(1)";
 
 
-                oscillator.stop(
-                    audioContext.currentTime +
-                    index * 0.12 +
-                    0.5
-                );
+        loveNo.style.position =
+            "relative";
 
-            }
-        );
+
+        loveNo.style.left =
+            "0";
+
+        loveNo.style.top =
+            "0";
+
+
+        loveButtons.style.display =
+            "flex";
+
+
+        loveNext.style.display =
+            "none";
+
+
+        loveMessage.style.display =
+            "none";
+
+
+        loveAgain.style.display =
+            "none";
 
     }
 
-
-    /* =========================
-       HEARTS
-    ========================= */
 
     function createHearts() {
 
         for (
             let i = 0;
-            i < 35;
+            i < 28;
             i++
         ) {
 
@@ -805,45 +2672,37 @@
 
 
             heart.className =
-                "heart";
+                "heart-particle";
 
 
-            const emojis = [
+            heart.innerHTML = [
                 "❤️",
                 "💕",
                 "💖",
                 "💗",
-                "💓",
-                "💘"
+                "💓"
+            ][
+                Math.floor(
+                    Math.random() * 5
+                )
             ];
 
 
-            heart.innerHTML =
-                emojis[
-                    Math.floor(
-                        Math.random() *
-                        emojis.length
-                    )
-                ];
-
-
             heart.style.left =
-                Math.random() *
-                100 +
+                Math.random() * 100 +
                 "vw";
 
 
             heart.style.top =
-                (70 +
-                Math.random() * 25) +
-                "vh";
+                "80vh";
 
 
             heart.style.setProperty(
                 "--move",
-                (Math.random() *
-                300 - 150) +
-                "px"
+                (
+                    Math.random() *
+                    300 - 150
+                ) + "px"
             );
 
 
@@ -852,210 +2711,87 @@
             );
 
 
-            setTimeout(() => {
-
-                heart.remove();
-
-            }, 2300);
+            setTimeout(
+                () => heart.remove(),
+                2300
+            );
 
         }
 
     }
 
 
-    /* =========================
-       CONFETTI
-    ========================= */
-
     function createConfetti() {
-
-        const pieces = [
-            "🎉",
-            "🎊",
-            "💖",
-            "❤️",
-            "✨"
-        ];
-
 
         for (
             let i = 0;
-            i < 60;
+            i < 50;
             i++
         ) {
 
-            const confetti =
+            const piece =
                 document.createElement(
                     "div"
                 );
 
 
-            confetti.className =
+            piece.className =
                 "confetti";
 
 
-            confetti.innerHTML =
-                pieces[
-                    Math.floor(
-                        Math.random() *
-                        pieces.length
-                    )
-                ];
+            piece.textContent = [
+                "🎉",
+                "✨",
+                "💖",
+                "❤️"
+            ][
+                Math.floor(
+                    Math.random() * 4
+                )
+            ];
 
 
-            confetti.style.left =
-                Math.random() *
-                100 +
+            piece.style.left =
+                Math.random() * 100 +
                 "vw";
 
 
-            confetti.style.fontSize =
-                (12 +
-                Math.random() * 15) +
-                "px";
+            piece.style.fontSize =
+                (
+                    12 +
+                    Math.random() * 15
+                ) + "px";
 
 
-            confetti.style.animationDuration =
-                (1.5 +
-                Math.random() * 2) +
-                "s";
+            piece.style.animationDuration =
+                (
+                    1.5 +
+                    Math.random() * 2
+                ) + "s";
 
 
             document.body.appendChild(
-                confetti
+                piece
             );
 
 
-            setTimeout(() => {
-
-                confetti.remove();
-
-            }, 4000);
+            setTimeout(
+                () => piece.remove(),
+                4000
+            );
 
         }
 
     }
 
 
-    /* =========================
-       LOAD QUESTION
-    ========================= */
-
-    function loadQuestion() {
-
-        const q =
-            questions[currentQuestion];
-
-
-        question.innerHTML =
-            q.question;
-
-
-        yes.innerHTML =
-            q.yes;
-
-
-        no.innerHTML =
-            q.no;
-
-
-        counter.innerHTML =
-            "Question " +
-            (currentQuestion + 1) +
-            " / " +
-            questions.length;
-
-
-        scoreText.innerHTML =
-            "❤️ Love points: " +
-            score;
-
-
-        progressBar.style.width =
-            (
-                ((currentQuestion + 1) /
-                questions.length) *
-                100
-            ) +
-            "%";
-
-
-        yesSize = 1;
-
-        noSize = 1;
-
-
-        yes.style.transform =
-            "scale(1)";
-
-
-        no.style.transform =
-            "scale(1)";
-
-
-        yes.style.position =
-            "static";
-
-
-        no.style.position =
-            "static";
-
-
-        yes.style.left = "0";
-
-        yes.style.top = "0";
-
-        no.style.left = "0";
-
-        no.style.top = "0";
-
-
-        buttons.style.display =
-            "flex";
-
-
-        next.style.display =
-            "none";
-
-
-        message.style.display =
-            "none";
-
-    }
-
-
-    /* =========================
-       NO BUTTON
-    ========================= */
-
-    no.addEventListener(
+    loveNo.addEventListener(
         "click",
         () => {
 
-            noSound();
+            yesSize += 0.25;
 
-
-            box.classList.remove(
-                "shake"
-            );
-
-            void box.offsetWidth;
-
-            box.classList.add(
-                "shake"
-            );
-
-
-            yesSize +=
-                0.25;
-
-
-            yes.style.transform =
-                `scale(${yesSize})`;
-
-
-            noSize -=
-                0.15;
+            noSize -= 0.15;
 
 
             if (
@@ -1067,95 +2803,60 @@
             }
 
 
-            no.style.transform =
+            loveYes.style.transform =
+                `scale(${yesSize})`;
+
+
+            loveNo.style.transform =
                 `scale(${noSize})`;
-
-
-            no.style.position =
-                "relative";
 
 
             const x =
                 Math.random() *
-                280 -
-                140;
+                250 - 125;
 
 
             const y =
                 Math.random() *
-                180 -
-                90;
+                150 - 75;
 
 
-            no.style.left =
+            loveNo.style.left =
                 x + "px";
 
 
-            no.style.top =
+            loveNo.style.top =
                 y + "px";
 
 
-            question.innerHTML =
-                "😈 Nice try! Choose again!";
+            loveQuestion.textContent =
+                "😈 Nice try! Try again!";
 
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                question.innerHTML =
-                    questions[
-                        currentQuestion
-                    ].question;
+                    loveQuestion.textContent =
+                        loveQuestions[
+                            loveIndex
+                        ].question;
 
-            }, 900);
+                },
+                900
+            );
 
         }
     );
 
 
-    /* =========================
-       YES BUTTON ❤️🎉
-    ========================= */
-
-    yes.addEventListener(
+    loveYes.addEventListener(
         "click",
         () => {
 
-            /* HAPPY SOUND */
-
-            happySound();
+            loveScore += 10;
 
 
-            /* POINTS */
-
-            score += 10;
-
-
-            /* HAPPY ANIMATION */
-
-            box.classList.remove(
-                "happy"
-            );
-
-            void box.offsetWidth;
-
-            box.classList.add(
-                "happy"
-            );
-
-
-            /* HEARTS */
-
-            createHearts();
-
-
-            /* CONFETTI */
-
-            createConfetti();
-
-
-            /* MESSAGE */
-
-            const happyMessages = [
+            const messages = [
 
                 "YEEEESSS! 😍❤️",
 
@@ -1165,71 +2866,62 @@
 
                 "THAT'S THE ANSWER! 🎉❤️",
 
-                "YOU MADE THE RIGHT CHOICE! 😎❤️",
-
-                "LET'S GOOOO! 🔥❤️"
+                "YOU MADE THE RIGHT CHOICE! 😎❤️"
 
             ];
 
 
-            message.innerHTML =
-                happyMessages[
+            loveMessage.textContent =
+                messages[
                     Math.floor(
                         Math.random() *
-                        happyMessages.length
+                        messages.length
                     )
                 ];
 
 
-            /* HIDE ANSWERS */
-
-            buttons.style.display =
+            loveButtons.style.display =
                 "none";
 
 
-            /* SHOW NEXT */
-
-            next.style.display =
+            loveNext.style.display =
                 "inline-block";
 
 
-            /* SHOW MESSAGE */
-
-            message.style.display =
+            loveMessage.style.display =
                 "block";
 
 
-            /* UPDATE SCORE */
-
-            scoreText.innerHTML =
+            loveScoreText.textContent =
                 "❤️ Love points: " +
-                score;
+                loveScore;
+
+
+            createHearts();
+
+            createConfetti();
 
         }
     );
 
 
-    /* =========================
-       NEXT
-    ========================= */
-
-    next.addEventListener(
+    loveNext.addEventListener(
         "click",
         () => {
 
-            currentQuestion++;
+            loveIndex++;
 
 
             if (
-                currentQuestion >=
-                questions.length
+                loveIndex >=
+                loveQuestions.length
             ) {
 
-                finishGame();
+                loveFinish();
 
             } else {
 
-                loadQuestion();
+                loveLoad();
 
             }
 
@@ -1237,181 +2929,78 @@
     );
 
 
-    /* =========================
-       FINISH
-    ========================= */
-
-    function finishGame() {
-
-        winSound();
+    function loveFinish() {
 
         createHearts();
 
         createConfetti();
 
 
-        question.innerHTML =
+        loveQuestion.textContent =
             "🎉 YOU DID IT! 🎉";
 
 
-        counter.innerHTML =
+        loveCounter.textContent =
             "🏆 FINAL RESULT";
 
 
-        scoreText.innerHTML =
-            "❤️ Your score: " +
-            score +
+        loveScoreText.textContent =
+            "❤️ Score: " +
+            loveScore +
             " / " +
-            questions.length * 10;
+            loveQuestions.length * 10;
 
 
-        buttons.style.display =
+        loveButtons.style.display =
             "none";
 
 
-        next.style.display =
+        loveNext.style.display =
             "none";
 
 
-        message.style.display =
+        loveMessage.style.display =
             "block";
 
 
-        message.innerHTML =
+        loveMessage.innerHTML =
             "I KNEW YOU WOULD SAY YES! 😂❤️<br><br>" +
             "You can't escape love 😈💕";
 
 
-        copyLink.style.display =
-            "inline-block";
-
-
-        shareBtn.style.display =
-            "inline-block";
-
-
-        playAgain.style.display =
+        loveAgain.style.display =
             "inline-block";
 
     }
 
 
-    /* =========================
-       COPY LINK
-    ========================= */
-
-    copyLink.addEventListener(
-        "click",
-        async () => {
-
-            try {
-
-                await navigator.clipboard
-                    .writeText(
-                        window.location.href
-                    );
-
-
-                copyLink.innerHTML =
-                    "✅ Link Copied!";
-
-
-                setTimeout(() => {
-
-                    copyLink.innerHTML =
-                        "🔗 Copy Link";
-
-                }, 2000);
-
-
-            } catch {
-
-                alert(
-                    "Copy failed 😭"
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       SHARE
-    ========================= */
-
-    shareBtn.addEventListener(
-        "click",
-        async () => {
-
-            try {
-
-                await navigator.clipboard
-                    .writeText(
-                        window.location.href
-                    );
-
-
-                shareBtn.innerHTML =
-                    "✅ Link Copied!";
-
-
-                setTimeout(() => {
-
-                    shareBtn.innerHTML =
-                        "📤 Share";
-
-                }, 2000);
-
-            } catch {
-
-                alert(
-                    "Copy failed 😭"
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       PLAY AGAIN
-    ========================= */
-
-    playAgain.addEventListener(
+    loveAgain.addEventListener(
         "click",
         () => {
 
-            currentQuestion = 0;
+            loveIndex = 0;
 
-            score = 0;
+            loveScore = 0;
 
-
-            copyLink.style.display =
-                "none";
-
-
-            shareBtn.style.display =
-                "none";
-
-
-            playAgain.style.display =
-                "none";
-
-
-            loadQuestion();
+            loveLoad();
 
         }
     );
 
 
+    loveLoad();
+
+
     /* =========================
-       START
+       START HOME
     ========================= */
 
-    loadQuestion();
+    showHome();
 
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
